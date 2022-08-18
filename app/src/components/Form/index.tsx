@@ -2,13 +2,8 @@ import { useEffect, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
-import {
-  GoogleMap,
-  useJsApiLoader,
-  Marker,
-  DirectionsRenderer,
-  Polyline,
-} from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, Polyline } from "@react-google-maps/api";
+import * as S from "./styles";
 
 import { AutoComplete } from "../AutoComplete";
 
@@ -90,7 +85,7 @@ export const Form: React.FC = () => {
     <Box position="relative">
       <Stack
         bgcolor="#546586"
-        height="150px"
+        height="max-content"
         width="100%"
         alignItems="center"
         justifyContent="center"
@@ -98,17 +93,13 @@ export const Form: React.FC = () => {
         zIndex="1"
         padding="10px"
       >
-        <Box
-          height="50px"
-          display="flex"
-          width="100%"
-          justifyContent="space-evenly"
-        >
+        <S.Navbar>
           <Stack
             display="flex"
             flexDirection="row"
             alignItems="center"
             gap="10px"
+            height="80px"
           >
             <FlightTakeoffIcon />
             <AutoComplete
@@ -123,6 +114,7 @@ export const Form: React.FC = () => {
             flexDirection="row"
             alignItems="center"
             gap="10px"
+            height="80px"
           >
             <FlightLandIcon />
             <AutoComplete
@@ -132,7 +124,7 @@ export const Form: React.FC = () => {
               label="To"
             />
           </Stack>
-        </Box>
+        </S.Navbar>
         <Stack>
           <h3>Distance {getDistance()} nmi</h3>
         </Stack>
