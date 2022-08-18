@@ -7,13 +7,14 @@ import {
   useJsApiLoader,
   Marker,
   DirectionsRenderer,
+  Polyline,
 } from "@react-google-maps/api";
 
 import { AutoComplete } from "../AutoComplete";
 
 const center = {
-  lat: 38.714447,
-  lng: -99.361144,
+  lat: 9.248514,
+  lng: -34.893732,
 };
 
 export const Form: React.FC = () => {
@@ -53,18 +54,11 @@ export const Form: React.FC = () => {
     if (origin && destination) {
       // eslint-disable-next-line
       // @ts-ignore
-      const directionsService = new google.maps.DirectionsService();
-      const results = await directionsService.route({
-        origin: origin,
-        destination: destination,
-        // @ts-ignore
-        // eslint-disable-next-line
-        travelMode: google.maps.TravelMode.DRIVING,
-      });
+      const flightPlanCoordinates = [origin, destination];
 
       // eslint-disable-next-line
       // @ts-ignore
-      setDirections(results);
+      setDirections(flightPlanCoordinates);
     } else {
       return;
     }
@@ -76,6 +70,21 @@ export const Form: React.FC = () => {
       calculateRoute();
     }
   }, [origin, destination, calculateRoute, getDistance]);
+
+  const options = {
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35,
+    editable: false,
+    visible: true,
+    radius: 30000,
+    geodesic: true,
+    paths: directions,
+    focus: true,
+    zIndex: 1,
+  };
 
   return (
     <Box position="relative">
@@ -133,14 +142,15 @@ export const Form: React.FC = () => {
           <GoogleMap
             mapContainerStyle={{ width: "100%", height: "100vh" }}
             center={center}
-            zoom={5}
+            zoom={2}
             options={{
               streetViewControl: false,
               mapTypeControl: false,
             }}
           >
-            {!origin && !destination && <Marker position={center} />}
-            {directions && <DirectionsRenderer directions={directions} />}
+            {directions && (
+              <Polyline visible path={directions} options={options} />
+            )}
           </GoogleMap>
         )}
       </Box>
