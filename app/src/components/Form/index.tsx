@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Box, Stack } from "@mui/material";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
-import { GoogleMap, useJsApiLoader, Polyline } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Polyline,
+  Marker,
+} from "@react-google-maps/api";
 import * as S from "./styles";
 
 import { AutoComplete } from "../AutoComplete";
 
 const center = {
-  lat: 9.248514,
-  lng: -34.893732,
+  lat: 34.139088,
+  lng: -20.865974,
 };
 
 export const Form: React.FC = () => {
@@ -22,6 +27,7 @@ export const Form: React.FC = () => {
   const [origin, setOrigin] = useState<MapsLocation>();
   const [destination, setDestination] = useState<MapsLocation>();
   const [directions, setDirections] = useState(null);
+  const map = useRef(null);
 
   function getDistance() {
     let p = 0.017453292519943295;
@@ -47,11 +53,7 @@ export const Form: React.FC = () => {
 
   async function calculateRoute() {
     if (origin && destination) {
-      // eslint-disable-next-line
-      // @ts-ignore
       const flightPlanCoordinates = [origin, destination];
-
-      // eslint-disable-next-line
       // @ts-ignore
       setDirections(flightPlanCoordinates);
     } else {
@@ -85,7 +87,7 @@ export const Form: React.FC = () => {
     <Box position="relative">
       <Stack
         bgcolor="#546586"
-        height="max-content"
+        height="fit-content"
         width="100%"
         alignItems="center"
         justifyContent="center"
@@ -132,14 +134,22 @@ export const Form: React.FC = () => {
       <Box width="100%" height="100vh" position="relative">
         {isLoaded && (
           <GoogleMap
+            ref={map}
             mapContainerStyle={{ width: "100%", height: "100vh" }}
             center={center}
-            zoom={2}
+            zoom={2.5}
             options={{
               streetViewControl: false,
               mapTypeControl: false,
             }}
           >
+            <Marker position={center} />
+            {directions && (
+              <>
+                <Marker position={origin as MapsLocation} />
+                <Marker position={destination as MapsLocation} />
+              </>
+            )}
             {directions && (
               <Polyline visible path={directions} options={options} />
             )}

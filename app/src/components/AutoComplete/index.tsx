@@ -61,12 +61,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
   }, [open]);
 
   return (
-    <Box
-      height="100vh"
-      display="flex"
-      alignItems="center"
-      justifyContent="space-evenly"
-    >
+    <Box display="flex" alignItems="center" justifyContent="space-evenly">
       <Autocomplete
         id="asynchronous-demo"
         sx={{ width: 300 }}
