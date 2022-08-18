@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { TextField, Autocomplete, CircularProgress, Box } from "@mui/material";
+import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -28,8 +28,8 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
     try {
       const { data } = await axios.get(url + value, {
         headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_Key as string,
-          "X-RapidAPI-Host": process.env.URL_RAPID_API as string,
+          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
+          "X-RapidAPI-Host": process.env.NEXT_PUBLIC_URL_RAPID_API as string,
         },
       });
       setOptions(data.items);
