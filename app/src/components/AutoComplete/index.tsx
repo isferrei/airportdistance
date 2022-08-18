@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { TextField, Autocomplete, CircularProgress, Box } from "@mui/material";
 import axios from "axios";
-import { api } from "../../services/api";
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -24,14 +23,13 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
 
   const url =
     "https://aerodatabox.p.rapidapi.com/airports/search/term?limit=10&q=";
-  const key = "5a4f29f7c5mshf05a11c02c835b8p1c47a3jsnc8898d976ea1";
 
   async function getAirports(value: string) {
     try {
       const { data } = await axios.get(url + value, {
         headers: {
-          "X-RapidAPI-Key": key,
-          "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com",
+          "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_Key as string,
+          "X-RapidAPI-Host": process.env.URL_RAPID_API as string,
         },
       });
       setOptions(data.items);
