@@ -1,8 +1,7 @@
 # Airport distance calculator
  
 
-This project was developed using Next.js. 
-Next is a framework that makes it easy to create 'universal' React apps - React apps that do both client and server side rendering.
+This project was developed using Next.js, a framework that makes it easy to create 'universal' React apps - React apps that do both client and server side rendering.
 
 
 Running locally in development mode
