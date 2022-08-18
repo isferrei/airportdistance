@@ -5,8 +5,10 @@ This project was developed using Next.js. Next is a framework that makes it easy
 
 
 Running locally in development mode
-To get started, just clone the repository and run npm install && npm run dev:
+To get started, just clone the repository and run yarn && yarn run dev:
 
+```
 git clone https://github.com/isferrei/airportdistance.git
-<br>yarn
-<br>yarn run dev 
+yarn
+yarn run dev 
+```
