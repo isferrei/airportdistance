@@ -62,7 +62,7 @@ export const Form: React.FC = () => {
         travelMode: google.maps.TravelMode.DRIVING,
       });
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // eslint-disable-next-line
       // @ts-ignore
       setDirections(results);
     } else {
@@ -75,7 +75,7 @@ export const Form: React.FC = () => {
       getDistance();
       calculateRoute();
     }
-  }, [origin, destination]);
+  }, [origin, destination, calculateRoute, getDistance]);
 
   return (
     <Box position="relative">
