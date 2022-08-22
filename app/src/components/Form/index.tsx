@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, CircularProgress, Stack, TextField } from "@mui/material";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
 import {
@@ -7,6 +7,8 @@ import {
   useJsApiLoader,
   Polyline,
   Marker,
+  Autocomplete,
+  LoadScript,
 } from "@react-google-maps/api";
 import * as S from "./styles";
 
@@ -84,54 +86,8 @@ export const Form: React.FC = () => {
   };
 
   return (
-    <Box position="relative">
-      <Stack
-        bgcolor="#546586"
-        height="fit-content"
-        width="100%"
-        alignItems="center"
-        justifyContent="center"
-        position="fixed"
-        zIndex="1"
-        padding="10px"
-      >
-        <S.Navbar>
-          <Stack
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            gap="10px"
-            height="80px"
-          >
-            <FlightTakeoffIcon />
-            <AutoComplete
-              setValue={(value) =>
-                setOrigin({ lat: value.lat, lng: value.lon })
-              }
-              label="From"
-            />
-          </Stack>
-          <Stack
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            gap="10px"
-            height="80px"
-          >
-            <FlightLandIcon />
-            <AutoComplete
-              setValue={(value) =>
-                setDestination({ lat: value.lat, lng: value.lon })
-              }
-              label="To"
-            />
-          </Stack>
-        </S.Navbar>
-        <Stack>
-          <h3>Distance {getDistance()} nmi</h3>
-        </Stack>
-      </Stack>
-      <Box width="100%" height="100vh" position="relative">
+    <Box position="relative" width="100vw" height="100vh" padding="10px 0">
+      <Box width="100vw" height="100%" position="absolute" left={0} top={0}>
         {isLoaded && (
           <GoogleMap
             ref={map}
@@ -156,6 +112,58 @@ export const Form: React.FC = () => {
           </GoogleMap>
         )}
       </Box>
+      <S.Container>
+        <Box
+          bgcolor="#546586"
+          display="flex"
+          flexDirection="column"
+          width="max-content"
+          alignItems="center"
+          justifyContent="center"
+          zIndex="1"
+          padding="20px"
+          margin="auto"
+          borderRadius="15px"
+          position="inherit"
+          boxShadow="5"
+        >
+          <S.Navbar>
+            <Stack
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              gap="10px"
+              height="80px"
+            >
+              <FlightTakeoffIcon />
+              <AutoComplete
+                setValue={(value) =>
+                  setOrigin({ lat: value.lat, lng: value.lon })
+                }
+                label="From"
+              />
+            </Stack>
+            <Stack
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              gap="10px"
+              height="80px"
+            >
+              <FlightLandIcon />
+              <AutoComplete
+                setValue={(value) =>
+                  setDestination({ lat: value.lat, lng: value.lon })
+                }
+                label="To"
+              />
+            </Stack>
+          </S.Navbar>
+          <Stack>
+            <h3>Distance {getDistance()} nmi</h3>
+          </Stack>
+        </Box>
+      </S.Container>
     </Box>
   );
 };

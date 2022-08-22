@@ -1,4 +1,4 @@
-import { Autocomplete, Box, CircularProgress, TextField } from "@mui/material";
+import { Box, CircularProgress, TextField, Autocomplete } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -61,10 +61,15 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
   }, [open]);
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-evenly">
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="space-evenly"
+      width="100%"
+    >
       <Autocomplete
         id="asynchronous-demo"
-        sx={{ width: 300 }}
+        sx={{ width: 200 }}
         open={open}
         onOpen={() => {
           setOpen(true);

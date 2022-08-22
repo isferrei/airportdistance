@@ -710,6 +710,11 @@ add@^2.0.6:
   resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
   integrity sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==
 
+air-port-codes-node@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/air-port-codes-node/-/air-port-codes-node-1.3.7.tgz#a57a673b5e5dbb28eebb3848d343e9ed34fe43a7"
+  integrity sha512-jHB5Q6V5gCuClX1N7Cb2FGuQUqQF0CddQ4LgzMhmAdby99QV6ZNg775M6SCqdFrdGlwBHBYBZxiLaUKEia3QBw==
+
 ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
