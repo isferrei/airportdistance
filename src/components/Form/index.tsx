@@ -99,7 +99,6 @@ export const Form: React.FC = () => {
               mapTypeControl: false,
             }}
           >
-            <Marker position={center} />
             {directions && (
               <>
                 <Marker position={origin as MapsLocation} />
