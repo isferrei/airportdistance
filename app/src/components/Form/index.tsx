@@ -112,57 +112,55 @@ export const Form: React.FC = () => {
           </GoogleMap>
         )}
       </Box>
-      <S.Container>
-        <Box
-          bgcolor="#546586"
-          display="flex"
-          flexDirection="column"
-          width="max-content"
-          alignItems="center"
-          justifyContent="center"
-          zIndex="1"
-          padding="20px"
-          margin="auto"
-          borderRadius="15px"
-          position="inherit"
-          boxShadow="5"
-        >
-          <S.Navbar>
-            <Stack
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              gap="10px"
-              height="80px"
-            >
-              <FlightTakeoffIcon />
-              <AutoComplete
-                setValue={(value) =>
-                  setOrigin({ lat: value.lat, lng: value.lon })
-                }
-                label="From"
-              />
-            </Stack>
-            <Stack
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              gap="10px"
-              height="80px"
-            >
-              <FlightLandIcon />
-              <AutoComplete
-                setValue={(value) =>
-                  setDestination({ lat: value.lat, lng: value.lon })
-                }
-                label="To"
-              />
-            </Stack>
-          </S.Navbar>
-          <Stack>
-            <h3>Distance {getDistance()} nmi</h3>
+      <S.Container
+        bgcolor="#546586"
+        display="flex"
+        flexDirection="column"
+        width="max-content"
+        alignItems="center"
+        justifyContent="center"
+        zIndex="1"
+        padding="20px"
+        margin="auto"
+        borderRadius="15px"
+        position="inherit"
+        boxShadow="5"
+      >
+        <S.Navbar>
+          <Stack
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            gap="10px"
+            height="80px"
+          >
+            <FlightTakeoffIcon />
+            <AutoComplete
+              setValue={(value) =>
+                setOrigin({ lat: value.lat, lng: value.lon })
+              }
+              label="From"
+            />
           </Stack>
-        </Box>
+          <Stack
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            gap="10px"
+            height="80px"
+          >
+            <FlightLandIcon />
+            <AutoComplete
+              setValue={(value) =>
+                setDestination({ lat: value.lat, lng: value.lon })
+              }
+              label="To"
+            />
+          </Stack>
+        </S.Navbar>
+        <Stack>
+          <h3>Distance {getDistance()} nmi</h3>
+        </Stack>
       </S.Container>
     </Box>
   );

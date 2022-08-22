@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Box } from "@mui/material";
 
 export const Navbar = styled.div`
   height: 80px;
@@ -9,18 +10,18 @@ export const Navbar = styled.div`
   gap: 50px;
   align-items: center;
   justify-content: center;
-  transition: all 1s;
+  transition: ease 1s;
 
   @media (max-width: 768px) {
     flex-direction: column;
     height: 165px;
     gap: 10px;
     align-items: center;
-    transition: all 1s;
+    transition: ease 1s;
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled(Box)`
   @keyframes go-back {
     from {
       transform: translateY(100px);
@@ -29,6 +30,6 @@ export const Container = styled.div`
       transform: translateY(0);
     }
   }
-  display: flex;
   animation: go-back 1s;
+  display: flex;
 `;
