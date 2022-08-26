@@ -25,17 +25,16 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
     "https://aerodatabox.p.rapidapi.com/airports/search/term?limit=10&q=";
 
   async function getAirports(value: string) {
-    try {
-      const { data } = await axios.get(url + value, {
+    await axios
+      .get(url + value, {
         headers: {
           "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
           "X-RapidAPI-Host": process.env.NEXT_PUBLIC_URL_RAPID_API as string,
         },
+      })
+      .then((res) => {
+        setOptions(res.data.items);
       });
-      setOptions(data.items);
-    } catch (error: any) {
-      console.error(error);
-    }
   }
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Box, CircularProgress, Stack, TextField } from "@mui/material";
+import { Box, Stack, TextField } from "@mui/material";
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import FlightLandIcon from "@mui/icons-material/FlightLand";
 import {
@@ -7,8 +7,6 @@ import {
   useJsApiLoader,
   Polyline,
   Marker,
-  Autocomplete,
-  LoadScript,
 } from "@react-google-maps/api";
 import * as S from "./styles";
 
@@ -20,7 +18,7 @@ const center = {
 };
 
 export const Form: React.FC = () => {
-  const { isLoaded } = useJsApiLoader({
+  const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDAlWHoVxmtuL9UHT25_yq7K3BMD9ZJnIY",
     libraries: ["places"],
@@ -29,7 +27,10 @@ export const Form: React.FC = () => {
   const [origin, setOrigin] = useState<MapsLocation>();
   const [destination, setDestination] = useState<MapsLocation>();
   const [directions, setDirections] = useState(null);
-  const map = useRef(null);
+
+  let isMobile =
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 764px)").matches;
 
   function getDistance() {
     let p = 0.017453292519943295;
@@ -68,7 +69,7 @@ export const Form: React.FC = () => {
       getDistance();
       calculateRoute();
     }
-  }, [origin, destination, calculateRoute, getDistance]);
+  }, [origin, destination]);
 
   const options = {
     strokeColor: "#FF0000",
@@ -90,10 +91,9 @@ export const Form: React.FC = () => {
       <Box width="100vw" height="100%" position="absolute" left={0} top={0}>
         {isLoaded && (
           <GoogleMap
-            ref={map}
             mapContainerStyle={{ width: "100%", height: "100vh" }}
             center={center}
-            zoom={2.5}
+            zoom={isMobile ? 2 : 2.5}
             options={{
               streetViewControl: false,
               mapTypeControl: false,
