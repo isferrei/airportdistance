@@ -21,19 +21,17 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
   const [options, setOptions] = useState<Airports[]>([]);
   const loading = open && options.length === 0;
 
-  const url =
-    "https://aerodatabox.p.rapidapi.com/airports/search/term?limit=10&q=";
+  const url = "https://www.air-port-codes.com/api/v1/multi?term=";
 
   async function getAirports(value: string) {
     await axios
       .get(url + value, {
         headers: {
-          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
-          "X-RapidAPI-Host": process.env.NEXT_PUBLIC_URL_RAPID_API as string,
+          "APC-Auth": "7d329693c5",
         },
       })
       .then((res) => {
-        setOptions(res.data.items);
+        setOptions(res.data.airports);
       });
   }
 
@@ -82,7 +80,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
         options={options}
         loading={loading}
         // @ts-ignore
-        onChange={(event, value) => setValue(value?.location)}
+        onChange={(event, value) => setValue(value)}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -93,7 +91,9 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
               ),
             }}
             label={label}
-            onChange={(e) => getAirports(e.target.value)}
+            onChange={(e) => {
+              e.target.value.length >= 3 && getAirports(e.target.value);
+            }}
           />
         )}
       />

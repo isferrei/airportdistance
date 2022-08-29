@@ -136,7 +136,10 @@ export const Form: React.FC = () => {
             <FlightTakeoffIcon />
             <AutoComplete
               setValue={(value) =>
-                setOrigin({ lat: value.lat, lng: value.lon })
+                setOrigin({
+                  lat: Number(value.latitude),
+                  lng: Number(value.longitude),
+                })
               }
               label="From"
             />
@@ -151,7 +154,10 @@ export const Form: React.FC = () => {
             <FlightLandIcon />
             <AutoComplete
               setValue={(value) =>
-                setDestination({ lat: value.lat, lng: value.lon })
+                setDestination({
+                  lat: Number(value.latitude),
+                  lng: Number(value.longitude),
+                })
               }
               label="To"
             />
