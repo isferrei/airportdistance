@@ -27,7 +27,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = ({
     await axios
       .get(url + value, {
         headers: {
-          "APC-Auth": "7d329693c5",
+          "APC-Auth": process.env.NEXT_PUBLIC_APC_API_KEY as string,
         },
       })
       .then((res) => {
